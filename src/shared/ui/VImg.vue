@@ -1,6 +1,6 @@
 <template>
     <div class="inline-flex">
-        <img class="h-full" :class="imgClass" :src="image" :alt="alternative">
+        <img class="h-full select-none" :class="imgClass" :src="image" :alt="alternative">
     </div>
 </template>
 

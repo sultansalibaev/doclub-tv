@@ -8,15 +8,15 @@ interface DirectiveElement extends Element {
 export default {
     name: 'click-outside',
     beforeMount(el: DirectiveElement, binding: DirectiveBinding) {
-        console.log('el', el);
         
         if (binding.value == false) return;
-        console.log('binding.value', binding.value);
         el.clickOutsideEvent = function (event) {
             // @ts-ignore
             const path = event.composedPath ? event.composedPath() : event.path;
             // @ts-ignore
             if (!(el === event.target || el.contains(event.target) || path.includes(el))) {
+                if (getComputedStyle(el, null).display == 'none') return;
+                
                 binding.value();
             }
         };

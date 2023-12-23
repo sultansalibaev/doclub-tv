@@ -1,12 +1,13 @@
 <template>
     <div
-        class="popup absolute max-w-[370px] p-4 rounded-xl "
+        class="bg-white shadow-default absolute max-w-[370px] p-4 rounded-xl "
         :class="{
             'duration-500': visibleTimout != undefined,
             'hidden': modal === false,
             'opacity-1': (timout < visibleTimout && visibleTimout != undefined) || modal === true,
             'opacity-0': (timout == visibleTimout && visibleTimout != undefined) || modal === false,
-            '!opacity-0 pointer-events-none': timout <= 0 && visibleTimout != undefined,
+            '!opacity-0': timout <= 0 && visibleTimout != undefined,
+            'pointer-events-none': timout < 0 && visibleTimout != undefined,
             'transition-opacity': visibleTimout != undefined,
         }"
         @mouseleave.stop="startIntarval"
@@ -17,7 +18,7 @@
         <div class="flex justify-between items-center h-[28px] mb-[8px]">
             <h5 class="text-500">{{ title }}</h5>
             <button @click.stop="hidePopup" class="cursor-pointer ml-[12px]">
-                <img svg-inline src="@/assets/svg/close.svg" alt="close" class="text-neutral-700" />
+                <icon-svg name="close" class="text-neutral-700" />
             </button>
         </div>
         <slot></slot>
@@ -69,7 +70,7 @@ export default {
         },
         hidePopup() {
             if (this.visibleTimout != undefined) {
-                this.timout = 0;
+                this.timout = -1;
                 return;
             }
             this.$emit('hidePopup')
@@ -77,13 +78,4 @@ export default {
     },
 }
 </script>
-
-<style>
-
-.popup {
-    background: white;
-    box-shadow: 0px 0px 15px 0px rgba(153, 153, 153, 0.20);
-}
-
-</style>
 

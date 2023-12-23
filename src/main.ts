@@ -3,29 +3,19 @@ import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
 import directives from './directives'
-// import VueTelInput from 'vue-tel-input'
-// import IconSvg from './components/shared/ui/IconSvg/IconSvg.vue'
-import UIComponents from './components/shared/ui'
-// import 'vue-tel-input/vue-tel-input.css';
+import UIComponents from './shared/ui'
 
-const app = createApp(App)
+const app = createApp(App);
 
 UIComponents.forEach(UIComponent => {
-    app.component(UIComponent.name, UIComponent)
-    
+    app.component(UIComponent.name, UIComponent);
 });
-// app.component('icon-svg', IconSvg)
-// app.component('v-img', VImg)
 
-app.use(router)
+app.use(router);
+
+
 directives.forEach(directive => {
-    app.directive(directive.name, directive)
-})
+    app.directive(directive.name, directive);
+});
 
-// const globalOptions = {
-//     mode: 'auto',
-// };
-
-// app.use(VueTelInput as any, globalOptions)
-
-app.mount('#app')
+app.mount('#app');

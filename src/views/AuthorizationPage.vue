@@ -1,44 +1,50 @@
 <template>
     <div class="flex h-full">
-        <div class="flex flex-col max-w-[390px] w-full mx-auto py-[56px] sm-modal:pt-[47px] sm-modal:pb-8 relative scrollbar-hide xl-modal:overflow-y-scroll">
+        <div
+            class="flex flex-col max-w-[390px] w-full mx-auto py-[56px] sm-screen:pt-[47px] sm-screen:pb-8 relative scrollbar-hide xl-screen:overflow-y-scroll">
             <div class="media-auth">
-                <h4>docmed.space</h4>
+                <div class="flex items-center justify-between">
+                    <h4>docmed.space</h4>
+                    <v-select-language class="relative md-auth-screen:hidden" />
+                </div>
                 <h1 class="my-8"><span class="text-primary-600">Closed</span><br>Evidence-based Medicine Club</h1>
                 <div class="text-400" v-if="!secretCode.value">
                     <label class="mb-4 inline-block">Phone number</label>
-                    
+
                     <vue-phone-input
                         class="text-neutral-400 h-[44px] border-current border-[1px] rounded-xl py-3 px-4"
                         :class="{
                             'border-primary-600': valueValid
                         }"
-                        v-if="!secretCode.value"
-                        v-focus
-                        v-model="value"
-                        :inputOptions="{
+                        v-if="!secretCode.value" v-focus v-model="value" :inputOptions="{
                             placeholder: ''
                         }"
-                        :defaultCountry="defaultCountryCode" 
-                        :dropdownOptions="{ showFlags: false, showDialCodeInSelection: true, showDialCodeInList: true }" 
+                        :defaultCountry="defaultCountryCode"
+                        :dropdownOptions="{ showFlags: false, showDialCodeInSelection: true, showDialCodeInList: true }"
                         @country-changed="setCountryCode"
                         @validate="validateNumber"
                         @keydown.enter="sendCode"
                     >
                         <template v-slot:arrow-icon>
-                            <img svg-inline src="@/assets/svg/angle-down.svg" alt="angle-down" class="text-neutral-700 ml-[7px] pt-px items-center h-[6px] max-w-[10px]"  />
+                            <icon-svg
+                                name="angle-down"
+                                class="text-neutral-700 ml-[7px] pt-px items-center h-[6px] max-w-[10px]"
+                            />
                         </template>
                     </vue-phone-input>
-                    
-                    <button
-                        class="
+
+                    <!-- <button class="
                             flex justify-center items-center w-full h-[44px] rounded-xl my-7 transition-all duration-100
-                        "
-                        :class="{
+                        " :class="{
                             'bg-primary-600 text-white': valueValid,
                             'bg-primary-200 text-primary-300 pointer-events-none': !valueValid,
-                        }"
-                        @click="sendCode"
-                    >Send code</button>
+                        }">Send code</button>
+                    <icon-svg name="close" /> -->
+                    <v-button :disabled="!valueValid" class="w-full my-7" text="Send code" @click="sendCode">
+                        <template v-slot:icon="{ classList }">
+                            <icon-svg name="close" :class="classList" />
+                        </template>
+                    </v-button>
 
                     <p class="lin leading-6">I hereby agree to the <u>Terms of processing of my personal data</u>.</p>
                 </div>
@@ -48,50 +54,32 @@
                         <button class="text-primary-600 underline ml-2" @click="resetSecretCode">Change the number</button>
                     </div>
                     <div class="flex gap-4" v-focus @keydown.enter="sendCode">
-                        <input
-                            type="number"
-                            :min="0"
-                            :max="9"
-                            required
-                            class="
+                        <input type="number" :min="0" :max="9" required class="
                                 text-center focus:outline-none w-full appearance-none border-primary-600 text-black border-[1px] rounded-xl py-3 px-4
-                            "
-                            :class="{
+                            " :class="{
                                 '!border-danger-500 bg-danger-100 text-danger-700': secretCodeIsInvalid
-                            }"
-                            @focus="allPreviousIsNull($event, index)"
-                            :value="code"
-                            @input="update_OTP_code($event, index)"
-                            @keydown="handleInput"
-                            v-for="(code, index) in OTP_code"
-                            :key="index"
-                        >
+                            }" @focus="allPreviousIsNull($event, index)" :value="code"
+                            @input="update_OTP_code($event, index)" @keydown="handleInput" v-for="(code, index) in OTP_code"
+                            :key="index">
                     </div>
-                    
-                    
-                    <button
-                        class="
+
+
+                    <button class="
                             flex justify-center items-center w-full h-[44px] rounded-xl mt-7 mb-8 transition-colors duration-100
-                        "
-                        :class="{
+                        " :class="{
                             'bg-primary-600 text-white': retryTimeout <= 0,
                             'bg-primary-200 text-primary-300 pointer-events-none': retryTimeout > 0,
                             '!mb-2': wrongNumberError
-                        }"
-                        @click="updateRetryTimeout"
-                    >{{ retryTimeout <= 0 ? 'Get a new code' : `New code in ${retryTimeout} seconds.` }}</button>
-                    <button
-                        v-if="wrongNumberError"
-                        class="
+                        }" @click="updateRetryTimeout">{{ retryTimeout <= 0 ? 'Get a new code' : `New code in
+                            ${retryTimeout} seconds.` }}</button>
+                            <button v-if="wrongNumberError" class="
                             flex justify-center items-center w-full h-[44px] rounded-xl mb-8 transition-colors duration-100 bg-neutral-100 text-500
-                        "
-                        @click="toggleInfoModal"
-                    >Code did not come</button>
+                        " @click="toggleInfoModal">Code did not come</button>
 
-                    <span class="text-danger-600 flex items-center" v-if="secretCodeIsInvalid">
-                        <img svg-inline src="@/assets/svg/alert-danger.svg" alt="alert-danger" class="mr-[5px]" />
-                        Invalid code
-                    </span>
+                            <span class="text-danger-600 flex items-center" v-if="secretCodeIsInvalid">
+                                <icon-svg name="alert-danger" class="mr-[5px]" />
+                                Invalid code
+                            </span>
 
                 </div>
             </div>
@@ -101,41 +89,34 @@
                     <span>Personal data protection</span>
                 </ContactUs>
             </div>
-            <v-popup :visibleTimout="4" title="🍪 We use cookies" class="sm-modal:bottom-8 md-modal:bottom-14 right-0 left-0 mx-auto">
-                <p class="text-400">Cookies help us deliver the best experience on our website. By using our website, you agree to the use of cookies.</p>
+            <v-popup :visibleTimout="4" title="🍪 We use cookies"
+                class="sm-screen:bottom-8 md-screen:bottom-14 right-0 left-0 mx-auto">
+                <p class="text-400">Cookies help us deliver the best experience on our website. By using our website, you
+                    agree to the use of cookies.</p>
             </v-popup>
         </div>
         <div class="inline-flex relative">
-            <div @click.stop="showLanguageModal" class="absolute top-[30px] left-[-93.3px] flex items-center cursor-pointer">
-                <img svg-inline src="@/assets/svg/angle-down.svg" alt="angle-down" class="text-primary-500 mr-[7px] pt-px items-center h-[6px] max-w-[10px]"/>
-                <small class="text-primary-500">{{ languages[selected_language] }}</small>
-                <v-popup @hide-popup="hideLanguageModal" :modal="language_modal" title="🏳️  Select a language"  class="mt-2 top-full w-[270px] right-0 mx-auto">
-                    <ul class="mt-4 space-y-4 text-400">
-                        <ol v-for="(lang, index) in languages" @click="selected_language = index">{{ lang }}</ol>
-                    </ul>
-                </v-popup>
-            </div>
+            
+            <v-select-language class="absolute top-[30px] left-[-93.3px] sm-auth-screen:hidden" />
             <v-img :image="AuthPageImg" :imgClass="'object-cover'" />
         </div>
-        <v-modal @toggle-modal="toggleInfoModal" :show="showInfo"/>
+        <v-modal @toggle-modal="toggleInfoModal" :show="showInfo" />
     </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import AuthPageImg from '@/assets/img/authorization-page.jpg'
-import VuePhoneInput from '@/components/shared/ui/VuePhoneInput.vue'
-import VModal from '@/components/shared/ui/VModal.vue'
+import VuePhoneInput from '@/shared/ui/VuePhoneInput.vue'
 import ContactUs from '@/components/ContactUs.vue'
 
 export default defineComponent({
     name: 'AuthorizationPage',
     components: {
         VuePhoneInput,
-        VModal,
         ContactUs,
     },
-    data () {
+    data() {
         return {
             AuthPageImg,
             value: '',
@@ -149,23 +130,14 @@ export default defineComponent({
             },
             OTP_code: [null, null, null, null],
             retryTimeout: 0,
-            languages: ['English', 'German', 'Spanish'],
-            selected_language: 0,
-            language_modal: false,
         }
     },
     methods: {
-        showLanguageModal() {
-            this.language_modal = true;
-        },
-        hideLanguageModal() {
-            this.language_modal = false;
-        },
         updateRetryTimeout() {
-            
+
             this.updateSecretCode();
             this.retryTimeout = 5;
-            
+
             let interval = setInterval(() => {
                 this.retryTimeout--;
                 if (this.retryTimeout <= 0) clearInterval(interval);
@@ -216,7 +188,7 @@ export default defineComponent({
             }
             this.OTP_code[index] = value;
             value = parseInt(this.OTP_code[index]);
-            this.OTP_code[index] = value > 9 ? parseInt((''+value).at(-1)) : value;
+            this.OTP_code[index] = value > 9 ? parseInt(('' + value).at(-1)) : value;
 
             if (target.nextElementSibling) target.nextElementSibling.focus();
         },

@@ -83,18 +83,19 @@
 }
 .vti__dropdown-item {
   cursor: pointer;
-  padding: 4px 8px;
+  /* padding: 4px 8px; */
+  height: 20px;
   border-radius: 5px;
 }
 .vti__dropdown-item:not(:last-child) {
-  margin-bottom: 7px;
+  margin-bottom: 16px;
 }
 /* .vti__dropdown-item.highlighted {
   background-color: #f3f3f3;
 } */
-.vti__dropdown-item:hover {
+/* .vti__dropdown-item:hover {
   background-color: #f3f3f3;
-}
+} */
 .vti__dropdown-item.last-preferred {
   border-bottom: 1px solid #cacaca;
 }

@@ -1,7 +1,7 @@
 <template>
     <div :class="['vue-tel-input relative', styleClasses, { disabled: disabled }]">
         <div
-            class="rounded-tl-[12px] rounded-bl-[12px]"
+            class="rounded-tl-[12px] rounded-bl-[12px] select-none"
             v-click-outside="clickedOutside"
             aria-label="Country Code Selector"
             aria-haspopup="listbox"
@@ -39,7 +39,7 @@
                 <div class="dropdown-header flex justify-between !cursor-default">
                     <span>☎️ &nbsp;Select a region</span>
                     <button @click.stop="clickedOutside" class="cursor-pointer">
-                        <img svg-inline src="@/assets/svg/close.svg" alt="close" class="text-neutral-700" />
+                        <icon-svg name="close" class="text-neutral-700" />
                     </button>
                 </div>
                 <div class="text-400 overflow-y-scroll max-h-[172px] gray-scrollbar pr-[5px] !cursor-default" style="border-right: 5px solid transparent;">
@@ -91,7 +91,7 @@
 
 <script>
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
-import utils, { getCountry, setCaretPosition } from '@/utils';
+import utils, { getCountry, setCaretPosition } from '@/shared/utils';
 import clickOutside from '@/directives/click-outside';
 
 function getDefault(key) {
@@ -530,7 +530,10 @@ export default {
         testCustomValidate() {
             return this.customValidate instanceof RegExp ? this.customValidate.test(this.phone) : false;
         },
-        onInput() {
+        onInput(event) {
+            if (Number.isNaN(Number(event.data))) {
+                this.$refs.input.value = event.target.value.slice(0,-1);
+            }
             this.$refs.input.setCustomValidity(this.phoneObject.valid ? '' : this.invalidMsg);
             // Returns response.number to assign it to v-model (if being used)
             // Returns full response for cases @input is used
@@ -645,5 +648,5 @@ export default {
 };
 </script>
 
-<style src="../../../assets/vue-phone-input/sprite.css"></style>
-<style src="../../../assets/vue-phone-input/component.css"></style>
+<style src="@/assets/vue-phone-input/sprite.css"></style>
+<style src="@/assets/vue-phone-input/component.css"></style>

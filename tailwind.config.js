@@ -6,10 +6,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'default': '0px 0px 15px 0px rgba(153, 153, 153, 0.20)',
+      },
       screens: {
-        'md-modal': { 'min': '820px' },
-        'sm-modal': { 'max': '820px' },
-        'xl-modal': { 'max': '1400px' }
+        'md-auth-screen': { 'min': '850px' },
+        'sm-auth-screen': { 'max': '850px' },
+        'md-screen': { 'min': '820px' },
+        'sm-screen': { 'max': '820px' },
+        'xl-screen': { 'max': '1400px' },
       },
       colors: {
         '100': "#E6E4EC",
