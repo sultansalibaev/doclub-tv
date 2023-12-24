@@ -57,6 +57,12 @@ module.exports = {
         'danger-500': "#EA6361",
         'danger-600': "#DA3F3D",
         'danger-700': "#C51311",
+        'link-default': "#7646FF",
+        'link-visited': "#A957EA",
+        'accent-1': "#F9B146",
+        'accent-2': "#32AEEE",
+        'accent-3': "#BA58A1",
+        'darkened': "rgba(0, 0, 0, 0.25)",
       }
     }
   },

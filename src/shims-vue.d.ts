@@ -9,6 +9,9 @@ declare module '*.vue' {
 //     const content: VueConstructor<Vue>;
 //     export default content;
 // }
+
+declare module '*.jpg';
+declare module '*.jpeg';
 declare module '*.(png|jpe?g|gif)' {
     const value: string;
     export default value;

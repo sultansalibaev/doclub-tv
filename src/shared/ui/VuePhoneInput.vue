@@ -17,7 +17,7 @@
         >
             <span class="vti__selection">
                 <span v-if="dropdownOptions.showFlags" :class="['vti__flag', activeCountryCode.toLowerCase()]"></span>
-                <span v-if="dropdownOptions.showDialCodeInSelection" class="text-500 text-[16px]">
+                <span v-if="dropdownOptions.showDialCodeInSelection" class="text-inherit text-[16px]" :title="activeCountry.name">
                     +{{ activeCountry && activeCountry.dialCode }}
                 </span>
                 <slot name="arrow-icon" :open="open">
@@ -45,7 +45,7 @@
                 <div class="text-400 overflow-y-scroll max-h-[172px] gray-scrollbar pr-[5px] !cursor-default" style="border-right: 5px solid transparent;">
                     <li
                         v-for="(pb, index) in sortedCountries"
-                        class="flex !cursor-pointer"
+                        class="flex !cursor-pointer hover:text-500 hover:font-semibold focus:text-500 focus:font-semibold transition-all duration-75"
                         role="option"
                         :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
                         :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
@@ -62,7 +62,7 @@
             </ul>
         </div>
         <input
-            class="text-500 rounded-tr-[12px] rounded-br-[12px] h-[20px]"
+            class="text-inherit bg-inherit rounded-tr-[12px] rounded-br-[12px] h-[20px]"
             v-model="phone"
             ref="input"
             :type="inputOptions.type"
@@ -91,7 +91,7 @@
 
 <script>
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
-import utils, { getCountry, setCaretPosition } from '@/shared/utils';
+import utils, { getCountry, setCaretPosition } from '@/shared/utils/vue-tel-input';
 import clickOutside from '@/directives/click-outside';
 
 function getDefault(key) {

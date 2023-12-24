@@ -1,7 +1,7 @@
 <template>
     <button
         class="
-            flex justify-center items-center rounded-xl transition-all duration-100
+            flex justify-center items-center rounded-xl transition-colors duration-100
         "
         :class="modes[mode][disabled ? 'disabled' : 'default'] + (mode != 'text' ? ' h-11 py-2.5 px-5' : ' h-5 ')"
         :disabled="disabled"

@@ -1,7 +1,20 @@
 <template>
-    <div class="dialog md-screen:[&>*]:max-w-[770px] sm-screen:[&>*]:h-full" v-show="show" @click="toggleModal">
-        <dialog open class="w-full md-screen:rounded-xl md-screen:!p-[40px] sm-screen:!px-[32px] sm-screen:!pt-[47px]"
-            @click.stop>
+    <div
+        class="dialog md-screen:[&>*]:max-w-[770px] sm-screen:[&>*]:h-full transition-all"
+        :class="{
+            'opacity-1 bg-darkened': show,
+            'opacity-0 pointer-events-none': !show,
+        }"
+        @click="toggleModal"
+    >
+        <dialog
+            open
+            class="w-full md-screen:rounded-xl md-screen:!p-[40px] sm-screen:!px-[32px] sm-screen:!pt-[47px] transition-all"
+            :class="{
+                'md-screen:scale-75': !show
+            }"
+            @click.stop
+        >
             <div class="flex justify-between items-start">
                 <h4 class="text-500">What should I do if the code doesn't arrive?</h4>
                 <button @click.stop="toggleModal" class="cursor-pointer ml-[12px]">
@@ -19,7 +32,7 @@
 </template>
 
 <script>
-import ContactUs from '@/components/ContactUs.vue'
+import ContactUs from '@/shared/ui/ContactUs.vue'
 
 export default {
     name: 'v-modal',
@@ -42,7 +55,6 @@ export default {
 
 <style>
 .dialog {
-    background: rgba(0, 0, 0, 0.25);
     position: fixed;
     top: 0;
     bottom: 0;

@@ -4,9 +4,9 @@
   /* border: 1px solid #C8C8E3; */
   text-align: left;
 }
-.vue-tel-input:has(input.vti__input:focus) {
+/* .vue-tel-input:has(input.vti__input:focus) {
   border: 1px solid #7646FF;
-}
+} */
 .vue-tel-input.disabled .selection,
 .vue-tel-input.disabled .dropdown,
 .vue-tel-input.disabled input {

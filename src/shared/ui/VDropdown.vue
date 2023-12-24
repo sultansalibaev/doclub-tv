@@ -9,19 +9,19 @@
         
         <div class="flex justify-between items-center h-7 mb-4">
             <h5 class="text-500">{{ title }}</h5>
-            <button @click.stop="hideDropdown" class="cursor-pointer ml-[12px] focus-visible:outline-none">
+            <button @click.stop="hideDropdown" class="cursor-pointer ml-[12px]">
                 <icon-svg name="close" class="text-neutral-700" />
             </button>
         </div>
         <slot>
             <div class="space-y-4 text-400 overflow-y-scroll max-h-[164px] gray-scrollbar border-r-[5px] border-transparent pr-[5px]">
-                <div
-                    class="truncate cursor-pointer"
+                <button
+                    class="truncate cursor-pointer focus:outline-none hover:text-500 hover:font-semibold focus:text-500 focus:font-semibold transition-all duration-75 block"
                     :title="getOptionName(option)"
                     @click.stop="selectOption(option, index)"
                     v-for="(option, index) in options"
                     :key="index"
-                >{{ getOptionName(option) }}</div>
+                >{{ getOptionName(option) }}</button>
             </div>
         </slot>
     </div>
@@ -62,7 +62,6 @@ export default {
         },
         selectOption(option, index) {
             this.$emit('selectOption', option, index);
-            console.log('selectOption', this.modal);
             this.hideDropdown();
         },
         getOptionName(option) {
