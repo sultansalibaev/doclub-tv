@@ -61,3 +61,13 @@ export function updateSecretCodeInput() {
         secretCode.value.value = oldSecretCode;
     });
 }
+
+export const wrongNumberError = computed(() => {
+    if (secretCode.value.errors.size > 2) return true;
+    const lastErrorCode = Array.from(secretCode.value.errors).pop();
+    return secretCode.value.errors.size == 2 && (
+        retryTimeout.value <= 0 || (
+            lastErrorCode != secretCode.value.value
+        )
+    )
+});

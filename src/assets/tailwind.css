@@ -10,6 +10,10 @@
         list-style: revert;
     }
 }
+/* gray-scrollbar */
+.aside-scrollbar {
+    @apply [&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:rounded-xl overflow-y-scroll;
+}
 
 h1,
 h2,
@@ -25,7 +29,11 @@ h1 {
     font-size: 40px;
     line-height: 44px;
 }
-h2 {}
+h2 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+}
 h3 {}
 h4 {
     font-size: 24px;
@@ -47,6 +55,9 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     line-height: 20px;
+}
+p {
+    line-height: 24px;
 }
 
 @media (max-width: 1400px) {

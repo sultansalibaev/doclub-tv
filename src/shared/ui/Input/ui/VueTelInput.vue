@@ -116,7 +116,7 @@ function getDefault(key) {
 // );
 
 export default {
-    name: 'VueTelInput',
+    name: 'vue-tel-input',
     directives: {
         clickOutside,
     },

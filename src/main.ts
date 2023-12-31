@@ -4,6 +4,7 @@ import router from './router'
 import './assets/tailwind.css'
 import directives from './directives'
 import UIComponents from './shared/ui'
+import './shared/utils/Prototypes'
 
 const app = createApp(App);
 

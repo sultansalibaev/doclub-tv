@@ -9,12 +9,19 @@ module.exports = {
       boxShadow: {
         'default': '0px 0px 15px 0px rgba(153, 153, 153, 0.20)',
       },
+      spacing: {
+        '15': '3.75rem',
+      },
       screens: {
         'md-auth-screen': { 'min': '850px' },
         'sm-auth-screen': { 'max': '850px' },
         'md-screen': { 'min': '820px' },
         'sm-screen': { 'max': '820px' },
         'xl-screen': { 'max': '1400px' },
+      },
+      fontFamily: {
+        ubuntu: ['Ubuntu', 'sans-serif'],
+        "open-sans": ['Open Sans', 'sans-serif'],
       },
       colors: {
         '100': "#E6E4EC",

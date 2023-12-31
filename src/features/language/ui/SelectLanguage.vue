@@ -2,7 +2,7 @@
     <button
         @click.stop="toggleLanguageModal"
         v-click-outside="hideLanguageModal"
-        class="flex items-center cursor-pointer outline-primary-500 [&:focus>svg]:text-primary-500 [&:focus>small]:text-primary-500"
+        class="flex items-center cursor-pointer focus:outline-none outline-primary-500 [&:focus>svg]:text-primary-500 [&:focus>small]:text-primary-500"
     >
         <icon-svg
             name="angle-down"
@@ -18,7 +18,7 @@
             "
         >{{ languages[selected_language] }}</small>
         <v-dropdown
-            class="mt-2 top-full w-[270px] right-0 mx-auto text-left"
+            :class="selectPosition + ' w-[270px] mx-auto text-left'"
             @hide-dropdown="hideLanguageModal"
             @select-option="selectLanguage"
             :options="languages"
@@ -29,15 +29,19 @@
 </template>
 
 <script>
-import { languages, selected_language, language_modal } from "@/features/language"
+import { languages, selected_language, language_modal } from "../model/slice/language"
 
 export default {
-    name: 'v-select-language',
+    name: 'select-language',
     props: {
         disabled: {
             type: Boolean,
             default: false
-        }
+        },
+        selectPosition: {
+            type: String,
+            default: 'mt-2 top-full right-0'
+        },
     },
     setup: () => ({
         languages,

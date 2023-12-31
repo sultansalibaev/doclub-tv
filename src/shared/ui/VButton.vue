@@ -1,7 +1,7 @@
 <template>
     <button
         class="
-            flex justify-center items-center rounded-xl transition-colors duration-100
+            flex justify-center items-center rounded-xl transition-colors duration-100 whitespace-nowrap focus:outline-none 
         "
         :class="modes[mode][disabled ? 'disabled' : 'default'] + (mode != 'text' ? ' h-11 py-2.5 px-5' : ' h-5 ')"
         :disabled="disabled"
@@ -67,37 +67,37 @@ export default {
             primary: {
                 color: 'text-white',
                 'color-disabled': 'text-primary-300',
-                default: 'bg-primary-600 text-white hover:bg-primary-700 focus:border-primary-600 focus:border-[1px]',
+                default: 'bg-primary-600 text-white hover:bg-primary-700 focus-visible:border-primary-600 focus-visible:border-[1px]',
                 disabled: 'bg-primary-200 text-primary-300 pointer-events-none',
             },
             secondary: {
                 color: 'text-500',
                 'color-disabled': 'text-200',
-                default: 'bg-neutral-100 text-500 hover:bg-neutral-200 focus:border-primary-600 focus:border-[1px]',
+                default: 'bg-neutral-100 text-500 hover:bg-neutral-200 focus-visible:border-primary-600 focus-visible:border-[1px]',
                 disabled: 'bg-neutral-100 text-200 pointer-events-none',
             },
             success: {
                 color: 'text-white',
                 'color-disabled': 'text-success',
-                default: 'bg-success-500 text-white hover:bg-success-600 focus:border-primary-600 focus:border-[1px]',
+                default: 'bg-success-500 text-white hover:bg-success-600 focus-visible:border-primary-600 focus-visible:border-[1px]',
                 disabled: 'bg-success-200 text-success-400 pointer-events-none',
             },
             danger: {
                 color: 'text-white',
                 'color-disabled': 'text-danger-400',
-                default: 'bg-danger-500 text-white hover:bg-danger-600 focus:border-primary-600 focus:border-[1px]',
+                default: 'bg-danger-500 text-white hover:bg-danger-600 focus-visible:border-primary-600 focus-visible:border-[1px]',
                 disabled: 'bg-danger-300 text-danger-400 pointer-events-none',
             },
             outline: {
                 color: 'text-500',
                 'color-disabled': 'text-neutral-300',
-                default: 'border-neutral-300 text-500 hover:border-neutral-300 focus:border-primary-400 border-[1px]',
+                default: 'border-neutral-300 text-500 hover:border-neutral-300 focus-visible:border-primary-400 border-[1px]',
                 disabled: 'border-neutral-300 text-neutral-300 border-[1px] pointer-events-none',
             },
             text: {
                 color: 'text-neutral-700',
                 'color-disabled': 'text-200',
-                default: 'text-neutral-700 hover:text-400 focus:text-500',
+                default: 'text-neutral-700 hover:text-400 focus-visible:text-500',
                 disabled: 'text-200 pointer-events-none',
             },
         }

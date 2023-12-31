@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import { secretCode, OTP_code, resetSecretCode, secretCodeIsInvalid, updateRetryTimeout } from "@/features/authorization"
+import { secretCode, OTP_code, resetSecretCode, secretCodeIsInvalid, updateRetryTimeout } from "@/features/authorization/secret-code"
 export default {
-    name: 'code-input',
+    name: 'input-otp',
     setup: () => ({
         secretCode,
         OTP_code,
