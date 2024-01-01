@@ -18,6 +18,8 @@ module.exports = {
         'md-screen': { 'min': '820px' },
         'sm-screen': { 'max': '820px' },
         'xl-screen': { 'max': '1400px' },
+        'mobile-screen': { 'max': '860px' },
+        'desktop-screen': { 'min': '861px' },
       },
       fontFamily: {
         ubuntu: ['Ubuntu', 'sans-serif'],

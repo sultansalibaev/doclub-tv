@@ -10,9 +10,35 @@
         list-style: revert;
     }
 }
-/* gray-scrollbar */
+
 .aside-scrollbar {
     @apply [&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:rounded-xl overflow-y-scroll;
+}
+@media (min-width: 501px) {
+    .main-scrollbar {
+        @apply [&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:rounded-xl overflow-y-scroll;
+    }
+}
+@media (max-width: 500px) {
+    .main-scrollbar {
+        @apply [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:rounded-xl overflow-y-scroll;
+    }
+}
+
+/* .hidden-scrollbar {
+    @apply [&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:rounded-xl overflow-y-scroll;
+} */
+
+.hidden-sidebar {
+    @apply mobile-screen:max-w-0 mobile-screen:min-w-0 mobile-screen:px-0 mobile-screen:border-r-0;
+}
+.show-sidebar {
+    @apply mobile-screen:max-w-0 mobile-screen:min-w-0 mobile-screen:px-0 mobile-screen:border-r-0;
+}
+
+.shadow-footer {
+    @apply fill-gray-100;
+    filter: drop-shadow(0px 0px 20px rgba(200, 227, 236, 0.50));
 }
 
 h1,
@@ -38,6 +64,7 @@ h3 {}
 h4 {
     font-size: 24px;
     line-height: 28px;
+    font-weight: 700;
 }
 h5 {
     font-size: 20px;

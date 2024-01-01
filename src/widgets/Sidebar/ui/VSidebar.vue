@@ -5,6 +5,8 @@
             aside-scrollbar transition-all overflow-x-hidden
         " :class="{
             'border-r-[10px] pr-[22px]': language_modal,
+            'hidden-sidebar': !menu_modal,
+            'mobile-screen:w-full mobile-screen:!border-b-[110px]': menu_modal,
             'border-r-[32px]': !language_modal,
         }">
         <router-link to="/main">
@@ -13,7 +15,7 @@
         <nav class="inline-flex flex-col gap-4 mt-10 p-0">
             <span class="uppercase text-300">Navigation</span>
             <div v-for="([name, link]) in Object.entries(navigation)" :key="name">
-                <nav-item :to="link" class="-ml-4" :active="link == currentPath">{{ name }}</nav-item>
+                <nav-item :to="link" class="-ml-4" :active="link == currentPath || (link == '/main' && currentPath == '/calendar')">{{ name }}</nav-item>
             </div>
         </nav>
         <nav class="inline-flex flex-col gap-4 mt-10 mb-10 p-0">
@@ -32,12 +34,15 @@
 
 <script>
 import { language_modal, SelectLanguage } from "@/features/language"
+import { menu_modal } from "../model/slice/sidebar"
+
 export default {
     components: {
         SelectLanguage,
     },
     setup: () => ({
         language_modal,
+        menu_modal,
     }),
     data() {
         return {
@@ -61,6 +66,6 @@ export default {
         currentPath() {
             return this.$router.currentRoute.value.path
         }
-    }
+    },
 }
 </script>

@@ -2,15 +2,24 @@
     <div class="flex flex-col gap-7 p-8 rounded-2xl border-[1px] border-neutral-300">
         <h4 class="text-500">Rating</h4>
         <div
-            class="flex gap-6 flex-wrap"
+            class="flex gap-6 mobile-screen:gap-4 flex-wrap"
         >
             <!-- class="flex gap-[clamp(16px,24px,24px)]" -->
-            <v-tab :active="true">Overall</v-tab>
-            <v-tab>Region</v-tab>
-            <v-tab>Specialization</v-tab>
+            <v-tab
+                :active="rating_by == 'overall'"
+                @click="rating_by = 'overall'"
+            >Overall</v-tab>
+            <v-tab
+                :active="rating_by == 'region'"
+                @click="rating_by = 'region'"
+            >Region</v-tab>
+            <v-tab
+                :active="rating_by == 'specialty'"
+                @click="rating_by = 'specialty'"
+            >Specialization</v-tab>
         </div>
         <div class="flex flex-col gap-3 w-full max-h-[249px] pb-px aside-scrollbar">
-            <div class="flex items-center gap-4" v-for="(user, index) in users" :key="index">
+            <div class="flex items-center gap-4" v-for="(user, index) in sorted_users" :key="index">
                 <span class="text-400">#{{ index + 122 }}</span>
                 <v-img :name="user.avatar" class="min-w-[40px] h-10" />
                 <div class="flex flex-col">
@@ -25,7 +34,7 @@
                         :title="user.full_name"
                     >{{ user.full_name }}</span>
 
-                    <small v-show="user.region" class="text-400 mt-1">{{ user.region }}</small>
+                    <small v-show="user.region || user.specialty" class="text-400 mt-1">{{ [user.region, user.specialty].filter(Boolean).join(' / ') }}</small>
                 </div>
             </div>
         </div>
@@ -36,17 +45,21 @@
 </template>
 
 <script setup lang="ts">
-import { profile, VProfile } from "@/entities/Profile"
-import { reactive, ref } from "vue";
+import { profile } from "@/entities/Profile"
+import { computed, reactive, ref } from "vue";
 
 defineOptions({
     name: 'v-rating',
 });
 
+type RatingType = 'overall' | 'region' | 'specialty'
+
+const rating_by = reactive(ref<RatingType>('overall'));
 const users = reactive(ref([
     {
         full_name: 'Dmitry Yuryevich Ovsyannikov',
         avatar: 'avatar/avatar-1.png',
+        region: 'Region',
     },
     {
         full_name: 'Tatiana Mikhailovna Ryabova',
@@ -55,16 +68,24 @@ const users = reactive(ref([
     {
         full_name: 'Giselle Saint Claire',
         avatar: 'avatar/profile-avatar.png',
+        specialty: 'Specialty',
     },
     {
         full_name: 'Аширматов Бахрам Маджидович',
         avatar: 'avatar/avatar-3.png',
+        region: 'Region',
     },
     {
         full_name: 'Умурзакова Дилором Хашимовна',
         avatar: 'avatar/avatar-4.png',
-        region: 'Region / Specialty',
+        region: 'Region',
+        specialty: 'Specialty',
     },
 ]))
+
+const sorted_users = computed(() => {
+    if (rating_by.value == 'overall') return users.value;
+    return users.value.filter(user => (rating_by.value in user))
+})
 
 </script>

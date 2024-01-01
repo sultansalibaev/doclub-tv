@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col w-full gap-4">
-        <span class="text-400" v-if="label != ''">{{ label }}</span>
+        <span class="text-400 whitespace-nowrap" v-if="label != ''">{{ label }}</span>
         <div
             class="flex gap-2 h-11 items-center px-4 rounded-xl border-[1px] [&_svg]:min-w-[16px]"
             :class="{

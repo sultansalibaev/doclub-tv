@@ -105,3 +105,14 @@ watch(() => props.month, () => {
 
 
 </script>
+
+<style>
+
+/* [@media(max-width:440px)] */
+@media (max-width:440px) {
+  tr > * {
+    height: 52px !important;
+  }
+}
+
+</style>

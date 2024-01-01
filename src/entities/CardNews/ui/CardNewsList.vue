@@ -4,7 +4,7 @@
             v-for="(card, i) in news_card_list"
             :key="i"
             :card="card"
-            class="w-[calc(50%-16px)]  [@media(max-width:1650px)]:w-full"
+            class="w-[calc(50%-16px)] [@media(max-width:1650px)]:w-full"
         />
     </div>
 </template>

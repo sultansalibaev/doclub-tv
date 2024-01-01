@@ -12,6 +12,16 @@ const routes: Array<RouteRecordRaw> = [
         name: 'main',
         component: () => import(/* webpackChunkName: "about" */ '../pages/MainPage.vue')
     },
+    {
+        path: '/calendar',
+        name: 'calendar',
+        component: () => import(/* webpackChunkName: "about" */ '../pages/CalendarPage.vue')
+    },
+    {
+        path: '/profile',
+        name: 'profile',
+        component: () => import(/* webpackChunkName: "about" */ '../pages/ProfilePage.vue')
+    },
 
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import(/* webpackChunkName: "about" */ '../pages/MainPage.vue') },
 ]
